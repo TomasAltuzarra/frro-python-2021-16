@@ -9,9 +9,9 @@ def maximo_encadenado(a: float, b: float, c: float) -> float:
     """
     if b < a > c:
         return a
-    elif a < b > c:
+    if a < b > c:
         return b
-    elif a < c > b:
+    else:
         return c
 
 
@@ -64,6 +64,9 @@ def maximo_recursivo(*args) -> float:
     elif len(args) == 2:
         a,b = args
         return a if a>b else b
+    else:
+        a, *resto = args 
+        return a
 
 
 # NO MODIFICAR - INICIO
