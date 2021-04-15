@@ -10,10 +10,9 @@ def numeros_al_final_basico(lista: List[Union[float, str]]) -> List[Union[float,
     letras=[]
     numeros=[]
     for i in lista:
-        try: 
-            int(i)
+        if type(i)==int: 
             numeros.append(i)
-        except:
+        else:
             letras.append(i)
     return letras + numeros
         
@@ -28,11 +27,9 @@ assert numeros_al_final_basico([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 
 
 def numeros_al_final_comprension(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """Re-escribir utilizando comprensión de listas."""
-    pass # Completar
-    #letras=[i for i in lista if ord(i)==[65,90,97,122]]
-    #numeros=[j for j in lista if j not in letras]
-    #return letras+numeros
-
+    numeros=[n for n in lista if type(n)==int]
+    letras=[l for l in lista if type(l)==str]
+    return letras + numeros
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_comprension([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -46,9 +43,7 @@ def numeros_al_final_sorted(lista: List[Union[float, str]]) -> List[Union[float,
     """Re-escribir utilizando la función sorted con una custom key.
     Referencia: https://docs.python.org/3/library/functions.html#sorted
     """
-    pass # Completar
-    #return sorted(lista)
-
+    return sorted(lista, key=lambda x: not type(x)==int, reverse=True)
 
 # NO MODIFICAR - INICIO
 assert numeros_al_final_sorted([3, "a", 1, "b", 10, "j"]) == ["a", "b", "j", 3, 1, 10]
@@ -62,7 +57,15 @@ def numeros_al_final_filter(lista: List[Union[float, str]]) -> List[Union[float,
     """CHALLENGE OPCIONAL - Re-escribir utilizando la función filter.
     Referencia: https://docs.python.org/3/library/functions.html#filter
     """
-    pass # Completar
+    a, *b = lista
+    if [i for i in lista if type(i)!=int]:
+        if type(a)==int:
+            b.append(a)
+            return numeros_al_final_recursivo(b)
+        else:
+            return [a] + numeros_al_final_recursivo(b)
+    else:
+        return lista
 
 
 # NO MODIFICAR - INICIO
@@ -76,8 +79,14 @@ if __name__ == "__main__":
 
 def numeros_al_final_recursivo(lista: List[Union[float, str]]) -> List[Union[float, str]]:
     """CHALLENGE OPCIONAL - Re-escribir de forma recursiva."""
-    pass # Completar
-
+    
+    if all(type(i)==int for i in lista):
+        return lista
+    a, *b = lista
+    if type(a) == int:
+        b.append(a)
+        return numeros_al_final_recursivo(b)
+    return [a] + numeros_al_final_recursivo(b)
 
 # NO MODIFICAR - INICIO
 if __name__ == "__main__":
