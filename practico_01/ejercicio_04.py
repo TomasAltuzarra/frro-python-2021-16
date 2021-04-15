@@ -39,8 +39,7 @@ def es_vocal_if_in(letra: str) -> bool:
     """
     if str.lower(letra) in ("a","e","i","o","u"):
         return True
-    else:
-        return False
+    return False
 
 
 # NO MODIFICAR - INICIO
