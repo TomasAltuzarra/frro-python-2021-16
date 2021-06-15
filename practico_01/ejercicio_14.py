@@ -18,7 +18,7 @@ def apply(lista: Iterable[int], func: Callable[[int], bool]) -> Iterable[bool]:
 
     list = []
     for i in range (0, len(lista)):
-        l = partial(func, lista(i))
+        l = partial(func, lista[i])
         list.append(l())
     return list
 

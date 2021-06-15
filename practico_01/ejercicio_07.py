@@ -27,10 +27,12 @@ def mitad(palabra: str) -> str:
     Restricción: No utilizar bucles - Usar Slices de listas.
     Referencia: https://docs.python.org/3/tutorial/introduction.html#lists
     """
-    if len(palabra)%2 >= 0.5:
-        cant=(len(palabra)//2)+1
-    cant=(len(palabra)//2)
-    return palabra[:cant]
+    resto = len(palabra)%2
+    div = len(palabra)//2
+    
+    if resto != 0:
+        return palabra[:(div+1)]
+    return palabra[:div]
 
 
 # NO MODIFICAR - INICIO

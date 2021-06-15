@@ -7,13 +7,13 @@ def tiene_pares_basico(numeros: Iterable[int]) -> bool:
     """Toma una lista y devuelve un booleano en función si tiene al menos un
     número par."""
 
-    result = False
     for i in numeros:
         if i%2==0:
-            result = True
+            return True
         else:
-            result = False
-    return result
+            resultado = False
+    return resultado
+    
 
 
 # NO MODIFICAR - INICIO

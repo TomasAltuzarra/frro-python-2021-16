@@ -57,15 +57,9 @@ def numeros_al_final_filter(lista: List[Union[float, str]]) -> List[Union[float,
     """CHALLENGE OPCIONAL - Re-escribir utilizando la función filter.
     Referencia: https://docs.python.org/3/library/functions.html#filter
     """
-    a, *b = lista
-    if [i for i in lista if type(i)!=int]:
-        if type(a)==int:
-            b.append(a)
-            return numeros_al_final_recursivo(b)
-        else:
-            return [a] + numeros_al_final_recursivo(b)
-    else:
-        return lista
+    ord = list(filter(lambda x: type(x)==str, lista))
+    ord.extend(list(filter(lambda x: x not in ord, lista)))
+    return ord
 
 
 # NO MODIFICAR - INICIO
