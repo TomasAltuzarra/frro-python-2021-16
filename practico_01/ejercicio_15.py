@@ -55,7 +55,13 @@ def medir_tiempo(func: Callable[[], int]) -> Tuple[int, float]:
     Restricción: La función no debe tomar parámetros y por lo tanto se
     recomienda usar partial.
     """
-    pass # Completar
+    dupla=[]
+    start = perf_counter()                      #empieza
+    funcion = partial(func)
+    dupla.append(funcion())
+    tiempo_ejecucion = perf_counter() - start   #"termina": se guarda desde que se empieza a contar restando el timepo de ejecucion anterior
+    dupla.append(tiempo_ejecucion)
+    return tuple(dupla)
 
 
 # NO MODIFICAR - INICIO
@@ -73,7 +79,15 @@ def medir_tiempo(func: Callable[[Sequence[int], int], int]) -> Callable[[Sequenc
     partial. En este caso se debe devolver una función que devuelva la tupla y
     tome una cantidad arbitraria de parámetros.
     """
-    pass # Completar
+    def sin_partial(*args):
+        nonlocal func
+        dupla=[]
+        start = perf_counter()                 
+        dupla.append(func(*args))
+        tiempo_ejecucion = perf_counter() - start   
+        dupla.append(tiempo_ejecucion)
+        return tuple(dupla)
+    return (sin_partial)
 
 
 # NO MODIFICAR - INICIO
@@ -127,7 +141,24 @@ def memoized(func):
     tiempo para la función calcular posibilidades. Prestar atención a los tiempo
     de ejecución
     """
-    pass # Completar
+
+    """
+    DOCUMENTACION NO OFICIAL - Agregado por los alumnos para su mejor comprension
+    The Memoization Algorithm Explained
+    The basic memoization algorithm looks as follows:
+
+    -Set up a cache data structure for function results
+    -Every time the function is called, do one of the following:
+        -Return the cached result, if any; or
+        -Call the function to compute the missing result, and then update the cache before returning the result to the caller
+    """
+    resultados = {}
+
+    def memo(i):
+        if i not in resultados:
+            resultados[n] = func
+        return resultados[n]
+    return memo(func)
 
 
 @medir_tiempo
